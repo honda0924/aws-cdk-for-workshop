@@ -792,3 +792,14 @@ describe('Topic', () => {
     });
   });
 });
+test('specify displayName', () => {
+  const stack = new cdk.Stack();
+
+  new sns.Topic(stack, 'MyTopic', {
+     displayName: 'MyDisplayName',
+  });
+
+  Template.fromStack(stack).hasResourceProperties('AWS::SNS::Topic', {
+    DisplayName: 'MyDisplayName',
+  });
+});
